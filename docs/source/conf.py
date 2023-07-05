@@ -18,6 +18,9 @@ extensions = []
 
 templates_path = ['_templates']
 exclude_patterns = []
+html_title = "Documentation"
+
+html_logo = "_static/trust_ml_logo_small.png"
 
 
 

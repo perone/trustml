@@ -1,11 +1,14 @@
-.. trustml documentation master file, created by
-   sphinx-quickstart on Tue Jul  4 23:14:25 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to trustml's documentation!
+trustml documentation
 ===================================
+trustml is a framework created to bring trust and transparency to machine learning code and models.
+trustml provides an easy-to-use framework to sign and verify machine learning models and code for companies
+and open-source developers. Built on top of sigstore, trustml uses a public and verifiable log of records 
+where anyone can see and verify signatures and verify provenance of artifacts. This means that anyone can
+easily guarantee that the models are coming from where they it claims to be, bringing accountability and
+protection to users and providers.
 
+Contents
+====================================
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
