@@ -10,6 +10,8 @@ development_requires: List[str] = [
     "sphinx>=7.0.1",
     "isort>=5.12.0",
     "twine>=4.0.2",
+    "interrogate>=1.5.0",
+    "bandit>=1.7.5",
     "sphinx-autobuild>=2021.3.14",
     "furo==2023.5.20",
 ]
@@ -24,7 +26,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/perone/trustml",
     install_requires=[
-        "sigstore>=1.1.2",
+        "sigstore>=2.0.0rc1",
+        "jsonlines>=3.1.0",
+        "sigstore-protobuf-specs==0.1.0",
     ],
     extras_require={
         'dev': development_requires,
