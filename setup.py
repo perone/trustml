@@ -46,4 +46,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     python_requires=">=3.8",
     include_package_data=True,
+    entry_points={
+        'console_scripts': ['trustml=trustml.cli:main'],
+    },
 )
