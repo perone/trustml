@@ -1,10 +1,19 @@
 import json
 import os
-from typing import Dict, Optional, TextIO, TypeAlias, Union
+from pathlib import Path
+from typing import Dict, List, Optional, TextIO, TypeAlias, Union
+from dataclasses import dataclass
 
 from sigstore_protobuf_specs.dev.sigstore.bundle.v1 import Bundle
+from sigstore.verify import VerificationMaterials
 
 BundleMap: TypeAlias = Dict[str, Dict]
+
+
+@dataclass
+class TrustStoreEntry:
+    filename: str
+    verification_material: VerificationMaterials
 
 
 class TrustStore:
@@ -34,6 +43,21 @@ class TrustStore:
                                f"{version} > {TrustStore.VERSION}.")
         bundle_map = json_data["bundle_map"]
         return TrustStore(bundle_map)
+
+    def to_verification_material(self,
+                                 offline: bool = False
+                                 ) -> List[TrustStoreEntry]:
+        verification_materials: List[TrustStoreEntry] = []
+        for filename, bundle_dict in self.bundle_map.items():
+            bundle = Bundle().from_dict(bundle_dict)
+            pfilename = Path(filename)
+            with pfilename.open(mode="rb", buffering=0) as fh:
+                materials = VerificationMaterials.from_bundle(input_=fh,
+                                                              bundle=bundle,
+                                                              offline=offline)
+                entry = TrustStoreEntry(filename, materials)
+                verification_materials.append(entry)
+        return verification_materials
 
     def __len__(self) -> int:
         return len(self.bundle_map)
